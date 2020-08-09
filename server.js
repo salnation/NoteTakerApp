@@ -47,3 +47,23 @@ res.sendFile(path.join(__dirname, "/public/notes.html"));
 app.get("/api/notes", function(req, res) {
 return res.json(dbNotes);
 });
+
+// these next requests are for posting and deleting the notes
+
+// post the notes
+app.post("/api/notes", function(req, res) {
+let newNote = req.body;
+let id = dbNotes.length;
+newNote.id = id + 1;
+dbNotes.push(newNote);
+dbUpdate(dbNotes);
+return res.json(dbNotes);
+});
+    
+app.delete("/api/notes/:id", (req, res) => {
+let id = req.params.id;
+let x = 1;
+delete dbNotes[id - 1];
+dbUpdate(dbNotes);
+res.send(dbNotes);
+});
