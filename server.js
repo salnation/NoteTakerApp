@@ -59,7 +59,8 @@ dbNotes.push(newNote);
 dbUpdate(dbNotes);
 return res.json(dbNotes);
 });
-    
+
+// delete the notes
 app.delete("/api/notes/:id", (req, res) => {
 let id = req.params.id;
 let x = 1;
@@ -67,3 +68,8 @@ delete dbNotes[id - 1];
 dbUpdate(dbNotes);
 res.send(dbNotes);
 });
+
+// listener function - app.listen
+app.listen(PORT, function() {
+    console.log("http://localhost:" + PORT);
+    });
